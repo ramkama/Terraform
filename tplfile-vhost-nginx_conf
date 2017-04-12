@@ -1,0 +1,69 @@
+upstream phpfpm {
+  server 127.0.0.1:9999;
+  #server unix:/var/run/php-fpm/${app_name}.soc;
+}
+
+server {
+  listen      80;
+  server_name _;
+  
+  root        /var/www/${app_eco}.${app_name}/live/web;
+  
+  error_log   /var/www/${app_eco}.${app_name}.vhost.logs/nginx.errors.logs;
+  access_log  /var/www/${app_eco}.${app_name}.vhost.logs/nginx.access.logs quick;
+  
+  # Deny all .* Files
+  location ~ /\. {
+    deny all;
+  }
+  
+  location ~ ^/nginx_status {
+    stub_status on;
+    access_log  off;
+  }
+  
+  location ~ ^/(fpm_status|ping|phpinfo.php|apc.php) {
+    access_log    off;
+    fastcgi_pass  phpfpm;
+    
+    fastcgi_param HTTPS off;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    include       fastcgi_params;
+  }
+  
+  # Strip app.php/ Prefix if it is present
+  rewrite ^/app\.php/?(.*)$ /$1 permanent;
+  
+  location / {
+    index     app.php;
+    try_files $uri @rewriteapp;
+  }
+  
+  location @rewriteapp {
+    rewrite ^(.*)$ /app.php/$1 last;
+  }
+  
+  # Pass all Symfony related PHP scripts to FastCGI server from upstream phpfcgi
+  location ~ ^/app\.php(/|$) {
+    fastcgi_pass              phpfpm;
+    fastcgi_split_path_info   ^(.+\.php)(/.*)$;
+    
+    fastcgi_param HTTPS off;
+    fastcgi_param SCRIPT_FILENAME	$document_root$fastcgi_script_name;
+    include       fastcgi_params;
+    internal;
+  }
+  
+  # return 404 for all other php files not matching the front controller
+  # this prevents access to other php files you don't want to be accessible.
+  location ~ \.php$ {
+    return 404;
+  }
+  
+  location ~* \.(jpg|jpeg|gif|png|css|js|ico|xml)$ {
+    expires       30d;
+    access_log    on;
+    log_not_found on;    
+  }
+  
+}

@@ -1,0 +1,35 @@
+[WebApp-${app_env}.${app_eco}.${app_name}-gqmcrxe.output.logs]
+log_group_name = WebApp-${app_env}.${app_eco}.${app_name}
+log_stream_name = gqmcrxe.output.logs
+datetime_format = %Y-%m-%dT%H:%M:%S%z
+time_zone = UTC
+file = /var/www/${app_eco}.${app_name}/live/var/logs/gqmcrxe.output.logs
+initial_position = start_of_file
+encoding = utf_8
+
+[WebApp-${app_env}.${app_eco}.${app_name}-gqmcrxe.errors.logs]
+log_group_name = WebApp-${app_env}.${app_eco}.${app_name}
+log_stream_name = gqmcrxe.errors.logs
+datetime_format = %Y-%m-%dT%H:%M:%S%z
+time_zone = UTC
+file = /var/www/${app_eco}.${app_name}/live/var/logs/gqmcrxe.errors.logs
+initial_position = start_of_file
+encoding = utf_8
+
+[WebApp-${app_env}.${app_eco}.${app_name}-gqmctx.output.logs]
+log_group_name = WebApp-${app_env}.${app_eco}.${app_name}
+log_stream_name = gqmctx.output.logs
+datetime_format = %Y-%m-%dT%H:%M:%S%z
+time_zone = UTC
+file = /var/www/${app_eco}.${app_name}/live/var/logs/gqmctx.output.logs
+initial_position = start_of_file
+encoding = utf_8
+
+[WebApp-${app_env}.${app_eco}.${app_name}-gqmctx.errors.logs]
+log_group_name = WebApp-${app_env}.${app_eco}.${app_name}
+log_stream_name = gqmctx.errors.logs
+datetime_format = %Y-%m-%dT%H:%M:%S%z
+time_zone = UTC
+file = /var/www/${app_eco}.${app_name}/live/var/logs/gqmctx.errors.logs
+initial_position = start_of_file
+encoding = utf_8

@@ -1,0 +1,8 @@
+[WebApp-${app_env}.${app_eco}.${app_name}.application.production.logs]
+log_group_name = WebApp-${app_env}.${app_eco}.${app_name}
+log_stream_name = application.production.logs
+datetime_format = %Y-%m-%dT%H:%M:%S%z
+time_zone = UTC
+file = /var/www/${app_eco}.${app_name}/live/app/logs/prod.log
+initial_position = start_of_file
+encoding = utf_8

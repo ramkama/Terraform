@@ -1,0 +1,26 @@
+[Instance-NGinx.Service.errors.logs]
+log_group_name = WebApp-${app_env}.${app_eco}.${app_name}
+log_stream_name = nginx.service-errors.logs
+datetime_format = %Y-%m-%dT%H:%M:%S%z
+time_zone = UTC
+file = /var/log/nginx/errors.log
+initial_position = start_of_file
+encoding = utf_8
+
+[Instance-PHPFPM.Service.errors.logs]
+log_group_name = WebApp-${app_env}.${app_eco}.${app_name}
+log_stream_name = phpfpm.service-errors.logs
+datetime_format = %Y-%m-%dT%H:%M:%S%z
+time_zone = UTC
+file = /var/log/php-fpm/errors.logs
+initial_position = start_of_file
+encoding = utf_8
+
+[Instance-PHP.errors.logs]
+log_group_name = WebApp-${app_env}.${app_eco}.${app_name}
+log_stream_name = php-errors.logs
+datetime_format = %Y-%m-%dT%H:%M:%S%z
+time_zone = UTC
+file = /var/log/php/errors.logs
+initial_position = start_of_file
+encoding = utf_8

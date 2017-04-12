@@ -1,15 +1,35 @@
-#Create VPC
+resource "aws_vpc" "public" {
+  count                 = "${var.aws_vpc_pub_enabled}"
+  cidr_block            = "${var.aws_vpc_pub_cidr_block}"
+  enable_dns_support    = "${var.aws_vpc_pub_enable_dns_support}"
+  enable_dns_hostnames  = "${var.aws_vpc_pub_enable_dns_hostnames}"
+  enable_classiclink    = "${var.aws_vpc_pub_enable_classiclink}"
 
-resource "aws_vpc" public {
-   cidr_block = "${var.aws_public_cidr_block}"
-   # dhcp_options_id = "${var.aws_public_dhcp_options_id}"
-   tags  {
-     Name = "${var.vpc_name}"
- }
+  tags {
+    Name          = "VPC-Pub-${var.prj_environment}-${var.prj_ecosystem}-${var.prj_application}"
+    Type          = "Public"
+    Resource      = "VPC"
+    ResourceGroup = "VPC"
+    Ecosystem     = "${var.prj_ecosystem}"
+    Application   = "${var.prj_application}"
+    Environment   = "${var.prj_environment}"
+	}
+}
 
-lifecycle {
-  create_before_destroy = false
-  prevent_destroy = false
- }
- 
+resource "aws_vpc" "private" {
+  count                 = "${var.aws_vpc_prv_enabled}"
+  cidr_block            = "${var.aws_vpc_prv_cidr_block}"
+  enable_dns_support    = "${var.aws_vpc_prv_enable_dns_support}"
+  enable_dns_hostnames  = "${var.aws_vpc_prv_enable_dns_hostnames}"
+  enable_classiclink    = "${var.aws_vpc_prv_enable_classiclink}"
+
+  tags {
+    Name          = "VPC-Prv-${var.prj_environment}-${var.prj_ecosystem}-${var.prj_application}"
+    Type          = "Private"
+    Resource      = "VPC"
+    ResourceGroup = "VPC"
+    Ecosystem     = "${var.prj_ecosystem}"
+    Application   = "${var.prj_application}"
+    Environment   = "${var.prj_environment}"
+	}
 }

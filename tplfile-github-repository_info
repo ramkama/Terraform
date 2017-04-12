@@ -1,0 +1,7 @@
+GITHub Account and Repository Information
+
+Username: ${github_username}
+Password: ${github_password}
+
+RepoURL: ${github_repo_url}
+RepoBranch: ${github_repo_branch}

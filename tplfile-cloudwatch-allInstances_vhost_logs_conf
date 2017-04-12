@@ -1,0 +1,35 @@
+[WebApp-${app_env}.${app_eco}.${app_name}-nginx.access.logs]
+log_group_name = WebApp-${app_env}.${app_eco}.${app_name}
+log_stream_name = nginx.vhost-access.logs
+datetime_format = %Y-%m-%dT%H:%M:%S%z
+time_zone = UTC
+file = /var/www/${app_eco}.${app_name}.vhost.logs/nginx.access.logs
+initial_position = start_of_file
+encoding = utf_8
+
+[WebApp-${app_env}.${app_eco}.${app_name}-nginx.errors.logs]
+log_group_name = WebApp-${app_env}.${app_eco}.${app_name}
+log_stream_name = nginx.vhost-errors.logs
+datetime_format = %Y-%m-%dT%H:%M:%S%z
+time_zone = UTC
+file = /var/www/${app_eco}.${app_name}.vhost.logs/nginx.errors.logs
+initial_position = start_of_file
+encoding = utf_8
+
+[WebApp-${app_env}.${app_eco}.${app_name}-phpfpm.slowreqs.logs]
+log_group_name = WebApp-${app_env}.${app_eco}.${app_name}
+log_stream_name = phpfpm.vhost-slowreqs.logs
+datetime_format = %Y-%m-%dT%H:%M:%S%z
+time_zone = UTC
+file = /var/www/${app_eco}.${app_name}.vhost.logs/phpfpm.slowreqs.logs
+initial_position = start_of_file
+encoding = utf_8
+
+[WebApp-${app_env}.${app_eco}.${app_name}-phpfpm.errors.logs]
+log_group_name = WebApp-${app_env}.${app_eco}.${app_name}
+log_stream_name = phpfpm.vhost-errors.logs
+datetime_format = %Y-%m-%dT%H:%M:%S%z
+time_zone = UTC
+file = /var/www/${app_eco}.${app_name}.vhost.logs/phpfpm.errors.logs
+initial_position = start_of_file
+encoding = utf_8
